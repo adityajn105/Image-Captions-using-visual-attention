@@ -1,0 +1,83 @@
+ <html>
+ 	<head>
+ 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+ 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+		<script type="text/javascript">
+			function validateForm() {
+				var x = document.forms["mainform"]["image"].value;
+				if (x == "") {
+				   alert("Please upload a new photo!!");
+				   return false;
+		  		}
+			}
+		</script>
+
+	</head>
+
+    <body>
+    	<div class="container">
+    		<div class="row">
+	    		<div class="col-md-12  text-center" style="margin: 2% 0% 2% 0%;">
+	    			<h1>Image Caption Generator</div>
+	    	</div>
+    		<div class="row">
+    			<div class="col-md-3"></div>
+	    		
+    			<div class="col-md-6 text-center">
+
+    				{% if not data.status %}
+    					<img id="myImage" width="100%" height="350px" src="/static/images/default.png" alt="Uploaded" />
+    					<br><br>
+    				{% else %}
+    					<img id="myImage" width="100%" height="350px" src={{"data:image;base64,"+data.img}} alt="Uploaded" />
+    					<br><br>
+    					<div id="result" class="text-center"> 
+				        	<div class="alert alert-success">
+						   		Generated Caption: <h5 style="font-weight: bolder;">{{data.caption}}</h5>
+							</div>
+						</div>
+    				{% endif %}
+    				
+
+    				<form name="mainform" method="post" action="/" enctype="multipart/form-data" onsubmit="return validateForm()">
+				  		<div class="custom-file">
+					    	<input type="file" id="imgInp" name="image">
+					    	<label class="custom-file-label" for="imgInp"> Upload Photo</label>
+					  	</div>
+					  	<br><br>
+					  	<button type="submit" class="btn btn-success"> Generate Caption</button>
+					</form>
+
+					<script>
+						function readURL(input) {
+						    if (input.files && input.files[0]) {
+						        var reader = new FileReader();
+						        reader.onload = function (e) {
+						            $('#myImage').attr('src', e.target.result);
+						        }
+						        reader.readAsDataURL(input.files[0]);
+						    }
+						}
+						$("#imgInp").change(function(){
+						    readURL(this);
+						 	$('#result').attr( 'style','display: none' )
+						});
+					</script>
+
+    			</div>
+
+		        <!---->
+	    	</div>
+	    	<div class="row" style="margin-top: 2%">
+	    		<div class="col-md-12 text-center">
+	    			<a href="https://github.com/adityajn105/Character-Recognition-webapp">
+	    				<button class="btn btn-default">View Project/Code on Github.</button>
+	    			</a>
+	    		</div>
+	    	</div>
+    	</div>
+	</body>
+</html>

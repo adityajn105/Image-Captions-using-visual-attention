@@ -12,6 +12,10 @@ Implemenetation of 2016 paper "Show, Attend and Tell: Neural Image Caption Gener
 
 2. Encoder
 	
-	* VGG19 will take 224 * 224 * 3 image and generate 512 feature maps of size 14 * 14, so we will have a0...a512 of size 196 each.
-	* 
+	* VGG19 will take 224 * 224 * 3 image and generate 512 feature maps of size 14 * 14
+	* Each pixel of 14x14 feature map represents a region of image, so we have 512 features for a region of image.
+	* We will represent 196 regions with 512 features for each region.
 
+3. Attention
+	
+	* 

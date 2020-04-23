@@ -18,4 +18,7 @@ Implemenetation of 2016 paper "Show, Attend and Tell: Neural Image Caption Gener
 
 3. Attention
 	
+	* Soft attention is when we calculate the context vector as a weighted sum of the encoder features. 
+	* Hard attention is when, instead of weighted average of all encoder features, we use attention scores to select a single hidden state.
+	* Here we will use Soft Attention.
 	* 
